@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.netflix-Img {
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .netflix-Img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Adjust opacity (last value) as needed */
+    z-index: -1; /* Place the overlay behind the image */
+  }
+  
+.netflix-svg{
+    position: relative;
+    height: 40px;
+    top: 15px;
+    right: 390px;    
+}
+.email{
+    padding: 18px 0 0px;
+}
+
+.signIn{
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+
+
+/* Shared styles for input fields */
+.email-input,
+.pass-input {
+  background-color: #333333;
+  border: none;
+  outline: none;
+  color: white;
+}
+.email-input:focus,
+.pass-input:focus{
+  color: white 
+}
+
+.email-label, .pass-label {
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+.email-input:not(:invalid) + .email-label,
+.email-input:focus + .email-label,
+.pass-input:not(:invalid) + .pass-label,
+.pass-input:focus + .pass-label { 
+  margin-top: -35px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.home-heading{
+  text-shadow: 1px 1px 10px rgb(145, 141, 141);
+}
+svg {
+  filter: drop-shadow(3px 5px 2px rgba(176, 42, 42, 0.4));
+}
+.background-image{
+  z-index: -1;
+}
+
+
+@media (width<=750px){
+  .confirm-email{
+    max-width: 100%;
+    height:100%;
+    width: 100%;
+  }
+  
+  .Login-help{
+    height: 100%;
+    width: 100%;
+  }
+  .header{
+    background-color: white;
+    height: 5rem;
+  }
+  .netflix-Svg {
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  .btn-signIn{
+    margin-right: 0;
+  }
+
+  .main::before {
+    content: ""; /* Add this line to create the pseudo-element */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: none;
+    /* Remove the box-shadow property */
+    box-shadow: none;
+  }
+}
+
+@media (width>=750px){
+  .main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 16px; /* Adjust this value to control the height of the shadow */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0, rgba(0, 0, 0, 0) 100%);
+    box-shadow: 0px 6px 10px -5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.invalid-email {
+  border: 1px solid #B00500;
+  outline: #B00500;
+}
