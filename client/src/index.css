@@ -131,3 +131,20 @@ svg {
   border: 1px solid #B00500;
   outline: #B00500;
 }
+.navbar{
+  /* box-shadow: 0 14px 15px 0 rgb(0, 0, 0 ,0.7) inset; */
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+}
+.nav_black{
+  background-color: black;
+}
+
+.fade-bottom{
+  background-image: linear-gradient(180deg,transparent, rgba(37, 37, 37, 0.61),#111);
+  height: 12rem;
+}
+.movie-title,.descrition{
+  text-shadow: 1px 1px 5px black;
+}
