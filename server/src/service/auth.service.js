@@ -10,8 +10,7 @@ import "dotenv/config";
 
 export const passwordValidate = (pass) => {
   // Password regex validation
-  const passwordRegex =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{5,}$/;
   return passwordRegex.test(pass);
 };
 

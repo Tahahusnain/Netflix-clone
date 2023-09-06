@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const passwordValidate = (pass) => {
   // Password regex validation
-  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{5,}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-12]).{5,}$/;
   return passwordRegex.test(pass);
 };
 

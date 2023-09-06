@@ -45,12 +45,6 @@ const Banner = () => {
         <h1 className="movie-title text-5xl font-bold ">
           {movie?.original_title}
         </h1>
-
-        <div className="w-[32.5rem] leading-loose  pt-2">
-          <h1 className="descrition  text-base leading-[1.5rem] ">
-            {truncatedDescription(`${movie?.overview}`, 150)}
-          </h1>
-        </div>
         <div className="pt-4 flex ">
           <button
             className=" bg-white hover:bg-[#C0C2C2] px-5 py-1 mr-4 rounded-[4px] text-black flex items-center shadow-md transition-all"
@@ -69,6 +63,11 @@ const Banner = () => {
             <ListIcon style={{ filter: "none", fontSize: 29 }} />
             <span className="font-semibold text-xl text-black">My List</span>
           </button>
+        </div>
+        <div className="w-[32.5rem] leading-loose  pt-2">
+          <h1 className="description text-lg leading-[1.5rem] ">
+            {truncatedDescription(`${movie?.overview}`, 150)}
+          </h1>
         </div>
       </div>
 

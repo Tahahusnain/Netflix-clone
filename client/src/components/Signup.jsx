@@ -2,39 +2,90 @@ import React from "react";
 import netflixImage from "../image/netflixImage.jpg";
 import { useState, useRef } from "react";
 import { axiosClient } from "../config/axios";
+// import jwt_decode from "jwt-decode";
 // import axios from "axios";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
+const passwordValidate = (pass) =>{
+  console.log('pass',pass);
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9]).{5,}$/; // added 'i' flag for case-insensitivity
+  console.log("Password =>",passwordRegex.test(pass))
+  return passwordRegex.test(pass);
+}
 
 const Signup = () => {
+  const [validUser , setValidUser] = useState(true)
   const [user, setUser] = useState(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const emailRef = useRef(null);//useRef
+  const passwordRef = useRef(null);//UseRef
+  const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
     console.log("user =>>>", email, password);
-    try {
-      console.log("in axios postSubmit request");
-      const res = await axiosClient.post(
-        "/auth/signup",
-        { email, password },
-        {
-          headers: {
-            "content-type": "application/json",
-          },
+    try{
+      
+      if( passwordValidate(password)){
+        console.log("in axios postSubmit request");
+        console.log("user =>>>", email, password);
+        
+        const res = await axiosClient.post(
+          "/auth/signup",
+          { email, password },
+          {
+            headers: {
+              "content-type": "application/json",
+            },
+          }
+        );
+        if (res.status !== 200) {
+          throw new Error("Failed to sign up: " + res.statusText);
         }
-      );
-      console.log("res data user =>>>", res.data);
-      setUser(res.data);
-    } catch (error) {
-      console.log(error);
+        console.log("res data user =>>>", res.data);
+        setUser(res.data);
+        Cookies.set("accessToken", res.data.accessToken);
+        navigate("/browse")
+      }else{
+        // Password is invalid
+        console.error("Password validation failed.");
+        setValidUser(false)
+        
+      }
+    }catch(error){
+      console.log("error signing user", error.message)
     }
 
-    // After login attempt, you might want to clear the input fields
+   // clearing ref
     emailRef.current.value = "";
     passwordRef.current.value = "";
+  };
+
+  // console.log("Password validation", validUser)
+  // console.log("User =>", user.accessToken);
+
+  // const accessToken = user.accessToken
+  // Cookies.set("accessToken", accessToken);
+
+  // const axiosJWT = axios.create()
+
+  // axiosJWT.interceptors.request.use(
+  //     async(config)=>{
+  //       let currentDate = new Date()
+  //       const decodeToken = jwt_decode(user.accessToken)
+  //       if(decodeToken.exp *1000 < currentDate.getTime()){
+
+  //       }
+  //     }
+  // )
+  const PasswordVisibility = (e) => {
+    e.preventDefault()
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -85,7 +136,7 @@ const Signup = () => {
               name="password"
               ref={passwordRef}
               className="pass-input w-full h-14 bg-[#333333] email-input text-base px-4 pt-3 rounded "
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               required
             />
             <label
@@ -94,6 +145,9 @@ const Signup = () => {
             >
               Password
             </label>
+            <button onClick={PasswordVisibility} className=" absolute right-10 h-14 rounded-e bg-[#333333] text-white px-2 py-1 hover:bg-gray-700">
+              {showPassword ? "HIDE" : "SHOW"}
+            </button>
           </div>
 
           <button
