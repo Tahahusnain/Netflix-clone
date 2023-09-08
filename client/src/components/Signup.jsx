@@ -49,7 +49,9 @@ const Signup = () => {
         }
         console.log("res data user =>>>", res.data);
         setUser(res.data);
-        Cookies.set("accessToken", res.data.accessToken);
+        Cookies.set("accessToken", res.data.accessToken,{
+          httpOnly: true,
+        });
         navigate("/browse")
       }else{
         // Password is invalid

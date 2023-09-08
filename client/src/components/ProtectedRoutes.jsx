@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
  const tokenExpired = (token)=>{
     if (!token) return false;
     const decodedToken = jwt_decode(token);
-    console.log(decodedToken)
+    console.log("decoded token =>",decodedToken)
     const currentTime = Date.now() / 1000; // Convert to seconds
     return decodedToken.exp > currentTime;
  }

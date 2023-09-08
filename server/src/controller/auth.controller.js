@@ -32,6 +32,7 @@ export const forgetPassword = async (req, res) => {
   }
 };
 
+//rest Password service 
 export const resetPassword = async (req, res) => {
   console.log("reset password contoller");
   const { token } = req.params;
